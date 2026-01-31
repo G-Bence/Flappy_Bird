@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net9.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="background.png" />
+    <None Remove="bird.gif" />
+    <None Remove="Bird.jpg" />
+    <None Remove="bird.png" />
+    <None Remove="pipe-green.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="background.png" />
+    <Resource Include="bird.gif" />
+    <Resource Include="Bird.jpg" />
+    <Resource Include="bird.png" />
+    <Resource Include="pipe-green.png" />
+  </ItemGroup>
+
+</Project>

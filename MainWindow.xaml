@@ -1,0 +1,50 @@
+﻿<Window x:Class="Flappy_Bird.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Flappy_Bird"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800" KeyDown="Window_KeyDown" MouseDown="Window_MouseDown" Loaded="Window_Loaded">
+    <Grid>
+        <Canvas Name="GameCanvas">
+            <Canvas.Background>
+                <ImageBrush ImageSource="/background.png"/>
+            </Canvas.Background>
+
+            <Image Name="Bird" Width="80" Height="60" Source="/bird.png" Canvas.Left="30" Canvas.Top="200"/>
+
+            <StackPanel x:Name="PipeRect" Width="120" Height="520" Canvas.Left="335" Canvas.Top="-120">
+                <Image x:Name="UpperPipe" Width="80" Height="80" Source="/pipe-green.png" RenderTransformOrigin="0.5,0.5">
+                    <Image.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleY="-1"/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Image.RenderTransform>
+                </Image>
+                <Image x:Name="LowerPipe" Width="80" Height="79.7" Source="/pipe-green.png" VerticalAlignment="Bottom"/>
+            </StackPanel>
+
+        </Canvas>
+
+        <!--
+
+		<Image Name="Bird" Width="120" Height="80" Source="/bird.png" HorizontalAlignment="Left" VerticalAlignment="Center">
+			<Image.RenderTransform>
+				<TranslateTransform x:Name="Birdtransform"/>
+			</Image.RenderTransform>
+		</Image>
+		-->
+
+        <TextBlock Name="InfoText"
+                   Margin="12"
+                   FontSize="22"
+                   Foreground="Black"
+                   Text="Score: 0"
+                   VerticalAlignment="Top"
+                   HorizontalAlignment="Center"/>
+    </Grid>
+</Window>
