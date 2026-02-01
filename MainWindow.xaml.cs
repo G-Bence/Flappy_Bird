@@ -47,8 +47,9 @@ namespace Flappy_Bird
 		private double birdVelocityY;
 
         private int score;
+        private bool isGameOver = false;
 
-		private double gravity;
+        private double gravity;
 		private double jumpStrength;
 
 		private DispatcherTimer gameTimer;
@@ -69,7 +70,34 @@ namespace Flappy_Bird
             InitializeComponent();
         }
 
-		
+        private void GameOver()
+        {
+            if (isGameOver) return;
+
+            isGameOver = true;
+            gameTimer.Stop();
+
+            FinalScoreText.Text = $"Score: {score}";
+            GameOverOverlay.Visibility = Visibility.Visible;
+        }
+
+        private void RestartGame()
+        {
+            GameOverOverlay.Visibility = Visibility.Collapsed;
+
+            isGameOver = false;
+            score = 0;
+
+            birdX = 30;
+            birdY = 200;
+            birdVelocityY = 0;
+
+            Canvas.SetLeft(Bird, birdX);
+            Canvas.SetTop(Bird, birdY);
+            InitPipes();
+
+            gameTimer.Start();
+        }
 
 
         private void InitPipes()
@@ -133,27 +161,35 @@ namespace Flappy_Bird
             Canvas.SetTop(pair.Bottom, topHeight + PipeGap);
         }
 
-        private void GameLoop(object sender, EventArgs e)
-		{
-			birdVelocityY += gravity;
-			birdY += birdVelocityY;
+        private void CheckCollisions()
+        {
+            //if (GameCanvas.ActualHeight <= 0 || GameCanvas.ActualWidth <= 0) return;
 
-			double floor = GameCanvas.ActualHeight - Bird.Height;
-			if (birdY < 0)
-			{
-				birdY = 0;
-				birdVelocityY = 0;
-			}
-			if (birdY > floor)
-			{
-				birdY = floor;
-				birdVelocityY = 0;
-			}
+            double birdLeft = Canvas.GetLeft(Bird);
+            double birdTop = Canvas.GetTop(Bird);
 
-			Canvas.SetTop(Bird, birdY);
-            MovePipes();
+            Rect birdRect = new Rect(birdLeft, birdTop, Bird.Width, Bird.Height);
 
 
+            if (birdRect.Top <= 0 || birdRect.Bottom >= GameCanvas.ActualHeight)
+            {
+                GameOver();
+                return;
+            }
+
+            foreach (var pair in pipePairs)
+            {
+                Rect topPipeRect = new Rect(pair.X, 0, pair.Top.Width, pair.Top.Height);
+
+                double bottomY = Canvas.GetTop(pair.Bottom);
+                Rect bottomPipeRect = new Rect(pair.X, bottomY, pair.Bottom.Width, pair.Bottom.Height);
+
+                if (birdRect.IntersectsWith(topPipeRect) || birdRect.IntersectsWith(bottomPipeRect))
+                {
+                    GameOver();
+                    return;
+                }
+            }
         }
 
         private void MovePipes()
@@ -199,8 +235,35 @@ namespace Flappy_Bird
 
         private void Jump()
 		{
-			birdVelocityY = jumpStrength;
-		}
+            if (isGameOver) return;
+            birdVelocityY = jumpStrength;
+        }
+
+        private void GameLoop(object sender, EventArgs e)
+        {
+            if (isGameOver) return;
+
+            birdVelocityY += gravity;
+            birdY += birdVelocityY;
+            Canvas.SetTop(Bird, birdY);
+
+            /*
+            double floor = GameCanvas.ActualHeight - Bird.Height;
+			if (birdY < 0)
+			{
+				birdY = 0;
+				birdVelocityY = 0;
+			}
+			if (birdY > floor)
+			{
+				birdY = floor;
+				birdVelocityY = 0;
+			}*/
+
+            MovePipes();
+
+            CheckCollisions();
+        }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -233,10 +296,14 @@ namespace Flappy_Bird
 			}
 		}
 
-
 		private void Window_MouseDown(object sender, MouseButtonEventArgs e)
 		{
 			Jump();
 		}
-	}
+
+        private void RestartButton_Click(object sender, RoutedEventArgs e)
+        {
+            RestartGame();
+        }
+    }
 }

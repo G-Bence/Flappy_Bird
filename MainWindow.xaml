@@ -33,5 +33,32 @@
                    Text="Score: 0"
                    VerticalAlignment="Top"
                    HorizontalAlignment="Center"/>
+
+        <Grid Name="GameOverOverlay"
+          Visibility="Collapsed"
+          Background="#AA000000">
+            <StackPanel HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
+                <TextBlock Text="GAME OVER"
+                       Foreground="Red"
+                       FontSize="72"
+                       FontWeight="Bold"
+                       HorizontalAlignment="Center"
+                       Margin="0,0,0,5"/>
+                
+                <TextBlock Name="FinalScoreText"
+                       Text="Score: 0"
+                       Foreground="White"
+                       FontSize="26"
+                       HorizontalAlignment="Center" Margin="0,0,0,35"/>
+
+                <!-- Restart button -->
+                <Button Content="Restart"
+                    Width="170"
+                    Height="48"
+                    FontSize="18"
+                    Click="RestartButton_Click"/>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Window>
