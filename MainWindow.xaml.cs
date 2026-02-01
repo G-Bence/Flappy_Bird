@@ -25,6 +25,8 @@ namespace Flappy_Bird
             public Image Top { get; }
             public Image Bottom { get; }
 
+            public bool HasScored { get; set; } = false;
+
             public double X { get; private set; }
 
             public PipePair(Image top, Image bottom, double x)
@@ -92,6 +94,9 @@ namespace Flappy_Bird
             birdY = 200;
             birdVelocityY = 0;
 
+            score = 0;
+            ScoreText.Text = "Score: 0";
+
             Canvas.SetLeft(Bird, birdX);
             Canvas.SetTop(Bird, birdY);
             InitPipes();
@@ -138,6 +143,8 @@ namespace Flappy_Bird
             GameCanvas.Children.Add(bottomPipe);
 
             PipePair pair = new PipePair(topPipe, bottomPipe, x);
+            pair.HasScored = false;
+
             RandomizePipePair(pair);
             pair.SetX(x);
 
@@ -188,6 +195,24 @@ namespace Flappy_Bird
                 {
                     GameOver();
                     return;
+                }
+            }
+        }
+
+        private void UpdateScore()
+        {
+            double birdLeft = Canvas.GetLeft(Bird);
+
+            foreach (var pair in pipePairs)
+            {
+                double pipeRight = pair.X + PipeWidth;
+
+                if (!pair.HasScored && pipeRight < birdLeft)
+                {
+                    score++;
+                    pair.HasScored = true;
+
+                    ScoreText.Text = $"Score: {score}";
                 }
             }
         }
@@ -261,8 +286,8 @@ namespace Flappy_Bird
 			}*/
 
             MovePipes();
-
             CheckCollisions();
+            UpdateScore();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -271,6 +296,9 @@ namespace Flappy_Bird
             birdY = 200;
             birdVelocityY = 0;
             score = 0;
+
+            score = 0;
+            ScoreText.Text = "Score: 0";
 
             pipeSource = new BitmapImage(new Uri("pipe-green.png", UriKind.Relative));
 
