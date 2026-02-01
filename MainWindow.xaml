@@ -14,19 +14,6 @@
 
             <Image Name="Bird" Width="80" Height="60" Source="/bird.png" Canvas.Left="30" Canvas.Top="200"/>
 
-            <StackPanel x:Name="PipeRect" Width="120" Height="520" Canvas.Left="335" Canvas.Top="-120">
-                <Image x:Name="UpperPipe" Width="80" Height="80" Source="/pipe-green.png" RenderTransformOrigin="0.5,0.5">
-                    <Image.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform ScaleY="-1"/>
-                            <SkewTransform/>
-                            <RotateTransform/>
-                            <TranslateTransform/>
-                        </TransformGroup>
-                    </Image.RenderTransform>
-                </Image>
-                <Image x:Name="LowerPipe" Width="80" Height="79.7" Source="/pipe-green.png" VerticalAlignment="Bottom"/>
-            </StackPanel>
 
         </Canvas>
 
@@ -39,7 +26,7 @@
 		</Image>
 		-->
 
-        <TextBlock Name="InfoText"
+        <TextBlock Name="ScoreText"
                    Margin="12"
                    FontSize="22"
                    Foreground="Black"
