@@ -34,6 +34,23 @@
                    VerticalAlignment="Top"
                    HorizontalAlignment="Center"/>
 
+        <Grid Name="RainOverlay"
+            Visibility="Collapsed"
+            IsHitTestVisible="False">
+            <Border Name="RainDim"
+            Background="Black"
+            Opacity="0"/>
+
+            <Image Name="RainImage"
+                Stretch="Fill"
+                Opacity="0"/>
+
+            <Image Name="FogImage"
+                Stretch="Fill"
+                Opacity="0"/>
+ 
+        </Grid>
+
         <Grid Name="GameOverOverlay"
           Visibility="Collapsed"
           Background="#AA000000">
@@ -45,7 +62,7 @@
                        FontWeight="Bold"
                        HorizontalAlignment="Center"
                        Margin="0,0,0,5"/>
-                
+
                 <TextBlock Name="FinalScoreText"
                        Text="Score: 0"
                        Foreground="White"

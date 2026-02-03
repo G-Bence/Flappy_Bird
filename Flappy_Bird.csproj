@@ -9,11 +9,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Assets\Rain.gif" />
     <None Remove="background.png" />
     <None Remove="bird.gif" />
     <None Remove="Bird.jpg" />
     <None Remove="bird.png" />
     <None Remove="pipe-green.png" />
+    <None Remove="Rain.gif" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\Rain.gif" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="WpfAnimatedGif" Version="2.0.2" />
   </ItemGroup>
 
   <ItemGroup>
@@ -22,6 +32,7 @@
     <Resource Include="Bird.jpg" />
     <Resource Include="bird.png" />
     <Resource Include="pipe-green.png" />
+    <Resource Include="Rain.gif" />
   </ItemGroup>
 
 </Project>
