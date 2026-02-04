@@ -9,6 +9,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Assets\fog.avif" />
+    <None Remove="Assets\fog_overlay.jpg" />
+    <None Remove="Assets\fog_overlay.png" />
     <None Remove="Assets\Rain.gif" />
     <None Remove="background.png" />
     <None Remove="bird.gif" />
@@ -16,6 +19,12 @@
     <None Remove="bird.png" />
     <None Remove="pipe-green.png" />
     <None Remove="Rain.gif" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Assets\fog.avif" />
+    <Content Include="Assets\fog_overlay.jpg" />
+    <Content Include="Assets\fog_overlay.png" />
   </ItemGroup>
 
   <ItemGroup>

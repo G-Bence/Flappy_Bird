@@ -45,10 +45,20 @@
                 Stretch="Fill"
                 Opacity="0"/>
 
-            <Image Name="FogImage"
-                Stretch="Fill"
-                Opacity="0"/>
- 
+            <Border Name="FogGradient"
+        Opacity="0"
+        HorizontalAlignment="Right"
+        Width="650"
+        IsHitTestVisible="False">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                        <GradientStop Color="#00FFFFFF" Offset="0.0"/>
+                        <GradientStop Color="#66FFFFFF" Offset="0.2"/>
+                        <GradientStop Color="#E6FFFFFF" Offset="1.0"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+            </Border>
+
         </Grid>
 
         <Grid Name="GameOverOverlay"
@@ -69,7 +79,6 @@
                        FontSize="26"
                        HorizontalAlignment="Center" Margin="0,0,0,35"/>
 
-                <!-- Restart button -->
                 <Button Content="Restart"
                     Width="170"
                     Height="48"

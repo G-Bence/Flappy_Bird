@@ -71,7 +71,7 @@ namespace Flappy_Bird
         private const int FogDurationSeconds = 15;
         private const int FogMaxScoreGain = 10;
 
-        private const double FogImageTargetOpacity = 0.75;
+        private const double FogImageTargetOpacity = 1;
         private const double FogDimContribution = 0.20;
 
 
@@ -95,7 +95,7 @@ namespace Flappy_Bird
         private const double PipeWidth = 70;
         private const double PipeGap = 160;        
         private const double PipeSpeed = 1.5;     
-        private const double PipeSpacing = 750;   
+        private const double PipeSpacing = 450;   
         private const double MinPipeHeight = 60;
 
 
@@ -264,6 +264,8 @@ namespace Flappy_Bird
                     {
                         StopFog();
                     }
+
+                    //ScoreText.Text = nextRainStartScore.ToString() ;
 
 
 
@@ -459,7 +461,7 @@ namespace Flappy_Bird
 
         private void SetupFog()
         {
-            FogImage.Source = new BitmapImage(new Uri("fog_overlay.jpg", UriKind.Relative));
+            //FogImage.Source = new BitmapImage(new Uri("fog_overlay.png", UriKind.Relative));
 
             fogTimer = new DispatcherTimer();
             fogTimer.Interval = TimeSpan.FromSeconds(FogDurationSeconds);
@@ -495,8 +497,8 @@ namespace Flappy_Bird
 
             if (immediate)
             {
-                FogImage.BeginAnimation(UIElement.OpacityProperty, null);
-                FogImage.Opacity = 0;
+                FogGradient.BeginAnimation(UIElement.OpacityProperty, null);
+                FogGradient.Opacity = 0;
             }
 
             UpdateWeatherOverlay(immediate);
@@ -515,12 +517,12 @@ namespace Flappy_Bird
                     RainOverlay.Visibility = Visibility.Collapsed;
                     RainDim.Opacity = 0;
                     RainImage.Opacity = 0;
-                    FogImage.Opacity = 0;
+                    FogGradient.Opacity = 0;
                     return;
                 }
 
                 AnimateOpacity(RainImage, 0, 300);
-                AnimateOpacity(FogImage, 0, 300);
+                AnimateOpacity(FogGradient, 0, 300);
                 var dimOut = new DoubleAnimation
                 {
                     From = RainDim.Opacity,
@@ -546,13 +548,13 @@ namespace Flappy_Bird
             {
                 RainDim.Opacity = dimTarget;
                 RainImage.Opacity = rainTarget;
-                FogImage.Opacity = fogTarget;
+                FogGradient.Opacity = fogTarget;
                 return;
             }
 
             AnimateOpacity(RainDim, dimTarget, 600);
             AnimateOpacity(RainImage, rainTarget, 400, beginMs: (rainTarget > RainImage.Opacity) ? 200 : 0);
-            AnimateOpacity(FogImage, fogTarget, 400, beginMs: (fogTarget > FogImage.Opacity) ? 200 : 0);
+            AnimateOpacity(FogGradient, fogTarget, 400, beginMs: (fogTarget > FogGradient.Opacity) ? 200 : 0);
         }
 
 
